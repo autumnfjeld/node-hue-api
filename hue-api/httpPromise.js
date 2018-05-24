@@ -140,7 +140,11 @@ function generateErrorsIfMatched(map) {
  * @param {*} parameters - set from user specified hue bridge config
  */
 module.exports.invoke = function (command, parameters) {
-  console.log('httpPromise.invoke() command:', command);
+  console.log(`httpPromise.invoke():
+    timeStamp: ${(new Date()).toTimeString()}
+    path: ${command.path}
+    method: ${command.method}`);
+
   var options = buildOptions(command, parameters)
     , promise
     ;
