@@ -13,20 +13,30 @@ var defaultOptions = {
   adapter: httpAdapter,
 };
 
+/**
+ * 
+ * @param {*} command 
+ * @param {*} parameters - includes host, username, timeout, port, proxy
+ */
 function buildOptions(command, parameters) {
   var options = {
-      adapter: httpAdapter,
-      debug: debug,
-      headers: {}
-    },
+    adapter: httpAdapter,
+    debug: debug,
+    headers: {}
+  },
     body,
     urlObj = {
       protocol: parameters.ssl ? "https" : "http",
       hostname: parameters.host
     };
 
+
   if (parameters.port) {
     urlObj.port = parameters.port;
+  }
+
+  if (parameters.proxy) {
+    options.proxy = parameters.proxy
   }
 
   options.timeout = parameters.timeout || 10000;
@@ -123,11 +133,19 @@ function generateErrorsIfMatched(map) {
   };
 }
 
+/**
+ * 
+ * @param {*} command 
+ * @param {*} parameters - set from user specified hue bridge config
+ */
 module.exports.invoke = function (command, parameters) {
+  console.log('httpPromise.invoke() ');
+  console.log('command', command);
+  console.log('parameters.proxy', parameter.proxy);
   var options = buildOptions(command, parameters)
     , promise
     ;
-
+  console.log('\noptions for axios', options);
   //promise = requestUtil.request(options);
   promise = wrapAxios(axios(options));
 
@@ -159,10 +177,10 @@ module.exports.invoke = function (command, parameters) {
 
 module.exports.simpleGet = function (uri) {
   return wrapAxios(axios.get(uri, defaultOptions))
-      .then(requireStatusCode200)
-      .then(function(result) {
-          return result.data;
-      });
+    .then(requireStatusCode200)
+    .then(function (result) {
+      return result.data;
+    });
 };
 
 /**
@@ -174,8 +192,8 @@ function wrapAxios(promise) {
   var deferred = Q.defer();
 
   promise.then(function (result) {
-      deferred.resolve(result);
-    })
+    deferred.resolve(result);
+  })
     .catch(function (err) {
       deferred.reject(err);
     });

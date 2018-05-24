@@ -27,7 +27,8 @@ module.exports = function (host, username, timeout, port) {
         hostname: host,
         username: username,
         timeout: timeout || 10000,
-        port: port || 80
+        port: port || 80,
+        proxy: proxy || undefined
     };
 
     return new HueApi(config);
@@ -974,7 +975,8 @@ HueApi.prototype._defaultOptions = function () {
         host: config.hostname,
         username: config.username,
         timeout: config.timeout,
-        port: config.port
+        port: config.port,
+        proxy: config.proxy
     };
 };
 
