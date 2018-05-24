@@ -140,13 +140,10 @@ function generateErrorsIfMatched(map) {
  * @param {*} parameters - set from user specified hue bridge config
  */
 module.exports.invoke = function (command, parameters) {
-  console.log('httpPromise.invoke() ');
-  console.log('command', command);
-  console.log('parameters.proxy', parameters.proxy);
+  console.log('httpPromise.invoke() command:', command);
   var options = buildOptions(command, parameters)
     , promise
     ;
-  console.log('\noptions for axios', options);
   //promise = requestUtil.request(options);
   promise = wrapAxios(axios(options));
 
