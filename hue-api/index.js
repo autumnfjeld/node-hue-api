@@ -22,13 +22,13 @@ function HueApi(config) {
     this._config = config;
 }
 
-module.exports = function (host, username, timeout, port) {
+module.exports = function (host, username, timeout, port, proxy) {
     var config = {
         hostname: host,
         username: username,
         timeout: timeout || 10000,
         port: port || 80,
-        proxy: proxy || undefined
+        proxy: proxy || {}
     };
 
     return new HueApi(config);

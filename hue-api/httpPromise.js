@@ -22,7 +22,8 @@ function buildOptions(command, parameters) {
   var options = {
     adapter: httpAdapter,
     debug: debug,
-    headers: {}
+    headers: {},
+    proxy: {}
   },
     body,
     urlObj = {
