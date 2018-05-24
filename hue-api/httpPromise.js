@@ -178,10 +178,10 @@ module.exports.invoke = function (command, parameters) {
 
 module.exports.simpleGet = function (uri) {
   return wrapAxios(axios.get(uri, defaultOptions))
-    .then(requireStatusCode200)
-    .then(function (result) {
-      return result.data;
-    });
+      .then(requireStatusCode200)
+      .then(function(result) {
+          return result.data;
+      });
 };
 
 /**
@@ -193,8 +193,8 @@ function wrapAxios(promise) {
   var deferred = Q.defer();
 
   promise.then(function (result) {
-    deferred.resolve(result);
-  })
+      deferred.resolve(result);
+    })
     .catch(function (err) {
       deferred.reject(err);
     });
