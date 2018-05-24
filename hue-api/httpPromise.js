@@ -142,7 +142,7 @@ function generateErrorsIfMatched(map) {
 module.exports.invoke = function (command, parameters) {
   console.log('httpPromise.invoke() ');
   console.log('command', command);
-  console.log('parameters.proxy', parameter.proxy);
+  console.log('parameters.proxy', parameters.proxy);
   var options = buildOptions(command, parameters)
     , promise
     ;
